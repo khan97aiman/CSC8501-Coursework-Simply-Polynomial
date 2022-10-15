@@ -129,10 +129,13 @@
   <ItemGroup>
     <ClCompile Include="CSC8501 Coursework - Polynomial.cpp" />
     <ClCompile Include="FileHandler.cpp" />
+    <ClCompile Include="TestFileHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="doctest.h" />
     <ClInclude Include="ErrorMessages.h" />
     <ClInclude Include="FileHandler.h" />
+    <ClInclude Include="TestLoader.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
