@@ -8,8 +8,10 @@ PolynomialEvaluator::PolynomialEvaluator(Polynomial* polynomial, int startInputR
 }
 
 std::vector<int> PolynomialEvaluator::evaluate() {
-	for (const int& x : inputSet) {
-		outputSet.push_back(polynomial->evaluate(x));
+	if (outputSet.size() == 0) {
+		for (const int& x : inputSet) {
+			outputSet.push_back(polynomial->evaluate(x));
+		}
 	}
 	return outputSet;
 }
