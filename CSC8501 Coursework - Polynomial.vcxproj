@@ -135,6 +135,8 @@
     <ClCompile Include="Polynomial.cpp" />
     <ClCompile Include="PolynomialEvaluator.cpp" />
     <ClCompile Include="TestFileHandler.cpp" />
+    <ClCompile Include="TestPolynomial.cpp" />
+    <ClCompile Include="TestPolynomialEvaluator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="doctest.h" />

@@ -1,7 +1,14 @@
 #pragma once
 #include <string>
+#include <vector>
 class Polynomial {
+	std::vector<int> coefficients;
 public:
-	Polynomial(std::string polynomialString);
+	Polynomial(std::vector<int> coefficients);
+	Polynomial(const Polynomial& p);
+	const bool operator==(const Polynomial& p);
+	const int degree() { return (int)coefficients.size() - 1; }
+	//int numberOfTerms();
+	const int evaluate(int x);
 };
 

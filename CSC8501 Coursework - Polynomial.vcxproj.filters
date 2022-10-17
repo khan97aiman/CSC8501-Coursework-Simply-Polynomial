@@ -36,6 +36,12 @@
     <ClCompile Include="Parser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TestPolynomial.cpp">
+      <Filter>Test Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TestPolynomialEvaluator.cpp">
+      <Filter>Test Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FileHandler.h">
