@@ -27,6 +27,15 @@
     <ClCompile Include="TestFileHandler.cpp">
       <Filter>Test Files</Filter>
     </ClCompile>
+    <ClCompile Include="PolynomialEvaluator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Polynomial.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Parser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FileHandler.h">
@@ -40,6 +49,15 @@
     </ClInclude>
     <ClInclude Include="TestLoader.h">
       <Filter>Test Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PolynomialEvaluator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Polynomial.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Parser.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

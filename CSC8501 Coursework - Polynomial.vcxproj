@@ -104,6 +104,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -118,6 +119,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -129,12 +131,18 @@
   <ItemGroup>
     <ClCompile Include="CSC8501 Coursework - Polynomial.cpp" />
     <ClCompile Include="FileHandler.cpp" />
+    <ClCompile Include="Parser.cpp" />
+    <ClCompile Include="Polynomial.cpp" />
+    <ClCompile Include="PolynomialEvaluator.cpp" />
     <ClCompile Include="TestFileHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="doctest.h" />
     <ClInclude Include="ErrorMessages.h" />
     <ClInclude Include="FileHandler.h" />
+    <ClInclude Include="Parser.h" />
+    <ClInclude Include="Polynomial.h" />
+    <ClInclude Include="PolynomialEvaluator.h" />
     <ClInclude Include="TestLoader.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

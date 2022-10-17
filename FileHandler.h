@@ -1,8 +1,8 @@
 #pragma once
 #include <string>
 #include <vector>
+//DISCUSS IF THIS SHOULD BE A CLASS?
 class FileHandler {
-	static std::vector<int> parseLine(std::string line);
 public:
 	static std::vector<int> read(const std::string filename);
 	static void write(const std::string filename, const std::vector<int>& data);

@@ -5,10 +5,12 @@
 #include <iostream>
 #include <vector>
 #include "FileHandler.h"
+#include "Parser.h"
 
 int main()
 {
     std::cout << "Hello World!\n";
+    Parser::parseAlgExp("x^2+x-3x^-1");//("-2x^4 - 3x^2 - 6x + 87");
 }
 #endif
 
