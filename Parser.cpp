@@ -5,14 +5,14 @@
 #include <regex>
 
 
-void Parser::polynomialLexing(std::string& expression, char delimiter) {
+void Parser::PolynomialHelper::polynomialLexing(std::string& expression, char delimiter) {
     auto i = expression.begin();
     while ((i = std::find(i, expression.end(), '-')) != expression.end()) {
         i = expression.insert(i, delimiter) + 2;
     }
 }
 
-std::vector<std::string> Parser::tokenize(const std::string& expression, char delimiter) {
+std::vector<std::string> Parser::PolynomialHelper::tokenize(const std::string& expression, char delimiter) {
     std::istringstream stream(expression);
     std::string token;
     std::vector<std::string> tokens;
@@ -22,7 +22,7 @@ std::vector<std::string> Parser::tokenize(const std::string& expression, char de
     return tokens;
 }
 
-void Parser::termLexing(std::vector<std::string>& tokens) {
+void Parser::PolynomialHelper::termLexing(std::vector<std::string>& tokens) {
     for (auto& token : tokens) {
         //if token does not contain x
         if (token.find('x') == std::string::npos) {
@@ -39,7 +39,7 @@ void Parser::termLexing(std::vector<std::string>& tokens) {
 }
 
 //this function extracts coefficient and exponent information from expression tokens
-std::vector<int> Parser::extractCoefficents(const std::vector<std::string>& tokens) {
+std::vector<int> Parser::PolynomialHelper::extractCoefficents(const std::vector<std::string>& tokens) {
     std::vector<int> coefficients(5, 0);; //5 depends of max poly degree (4 degree corresponds to 5 terms) //change this to maximum exponent of the poly string
     for (const auto& token : tokens) {
         std::stringstream tokenStream(token);
@@ -67,11 +67,11 @@ std::vector<int> Parser::parseCSV(const std::string& line)
 
 std::vector<int> Parser::parsePolynomial(const std::string& expression) {
     std::string pExpression = std::regex_replace(expression, std::regex("\\s+"), "");
-    polynomialLexing(pExpression, '+');
-    std::vector<std::string> tokens = tokenize(pExpression, '+');
-    termLexing(tokens);
+    PolynomialHelper::polynomialLexing(pExpression, '+');
+    std::vector<std::string> tokens = PolynomialHelper::tokenize(pExpression, '+');
+    PolynomialHelper::termLexing(tokens);
     //check if polynomial is valid???? should i check in polynomial class?? yes
-    return extractCoefficents(tokens);
+    return PolynomialHelper::extractCoefficents(tokens);
 }
 
 //parses to CSV String so that it can be outputted to console, change the name ???
@@ -87,7 +87,7 @@ std::string Parser::parseToCsvString(const std::vector<int>& data) {
 
 std::string Parser::parseToPolynomialString(const std::vector<int>& coefficients) {
     std::string polynomial;
-    int exp{ coefficients.size() - 1};
+    int exp{ (int)coefficients.size() - 1};
     for (const auto& coeff : coefficients) {
         if (coeff) {
             exp > 1 ? polynomial += coeff + "x^" + exp : exp ? polynomial += coeff + 'x' : polynomial += coeff;

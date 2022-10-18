@@ -33,7 +33,7 @@ void EvaluationSimulationHandler::handleFileInput() {
 }
 
 void EvaluationSimulationHandler::viewOutputOnConsole() {
-	std::cout << Parser::parseToCSV(evaluators[0]->getOutput());
+	std::cout << Parser::parseToCsvString(evaluators[0]->getOutput());
 }
 void EvaluationSimulationHandler::viewOutputOnFile() {
 }

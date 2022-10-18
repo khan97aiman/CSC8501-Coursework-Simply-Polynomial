@@ -7,7 +7,7 @@ namespace FileHandler {
 	struct FileFormatCSV {
 		std::vector<int> outputSet;
 		std::vector<int> inputRange;
-		int numTerms;
+		int numTerms{ 0 };
 	};
 
 	//expression file format (read/write both)
