@@ -26,7 +26,7 @@ FileHandler::FileFormatCSV FileHandler::CSV::readChunk(std::istream& file) {
 }
 
 FileHandler::FileFormatCSV FileHandler::CSV::read(const std::string& filename) {
-    std::ifstream file(filename);
+    std::ifstream file(DIRECTORY + filename);
     if (file.is_open()) {
         FileHandler::FileFormatCSV data = readChunk(file);
         file.close();
@@ -37,7 +37,7 @@ FileHandler::FileFormatCSV FileHandler::CSV::read(const std::string& filename) {
 
 std::vector<FileHandler::FileFormatCSV> FileHandler::CSV::readBulk(const std::string& filename) {
     std::vector<FileHandler::FileFormatCSV> data;
-    std::ifstream file(filename);
+    std::ifstream file(DIRECTORY + filename);
     if (file.is_open()) {
         while (!file.eof())
             data.push_back(readChunk(file));
@@ -49,7 +49,7 @@ std::vector<FileHandler::FileFormatCSV> FileHandler::CSV::readBulk(const std::st
 
 void FileHandler::CSV::write(const std::string& filename, const std::vector<int>& data) {
     std::ofstream file;
-    file.open(filename);
+    file.open(DIRECTORY + filename);
     for (const auto& value : data) 
         file << value << ',';
     file.close();
@@ -57,7 +57,7 @@ void FileHandler::CSV::write(const std::string& filename, const std::vector<int>
 
 void FileHandler::CSV::writeBulk(const std::string& filename, const std::vector<std::vector<int>>& data) {
     std::ofstream file;
-    file.open(filename);
+    file.open(DIRECTORY + filename);
     for (const auto& line : data) {
         for (const auto& value : line)
             file << value << ',';
@@ -78,7 +78,7 @@ FileHandler::FileFormatEXP FileHandler::TXT::readChunk(std::istream& file){
 }
 
 FileHandler::FileFormatEXP FileHandler::TXT::read(const std::string& filename) {
-    std::ifstream file(filename);
+    std::ifstream file(DIRECTORY + filename);
     if (file.is_open()) {
         FileHandler::FileFormatEXP data = readChunk(file);
         file.close();
@@ -90,7 +90,7 @@ FileHandler::FileFormatEXP FileHandler::TXT::read(const std::string& filename) {
 std::vector<FileHandler::FileFormatEXP> FileHandler::TXT::readBulk(const std::string& filename) {
     std::vector<FileHandler::FileFormatEXP> data;
     std::string line;
-    std::ifstream file(filename);
+    std::ifstream file(DIRECTORY + filename);
     if (file.is_open()) {
         while (!file.eof())
             data.push_back(readChunk(file));
@@ -102,7 +102,7 @@ std::vector<FileHandler::FileFormatEXP> FileHandler::TXT::readBulk(const std::st
 
 void FileHandler::TXT::write(const std::string& filename, const FileFormatEXP& data) {
     std::ofstream file;
-    file.open(filename);
+    file.open(DIRECTORY + filename);
     file << Parser::parseToPolynomialString(data.pCoefficients) << '\n';
     file << Parser::parseToCsvString(data.inputRange) << '\n';
     file.close();
@@ -110,7 +110,7 @@ void FileHandler::TXT::write(const std::string& filename, const FileFormatEXP& d
 
 void FileHandler::TXT::writeBulk(const std::string& filename, const std::vector<FileFormatEXP>& data) {
     std::ofstream file;
-    file.open(filename);
+    file.open(DIRECTORY + filename);
     for (const auto& line : data) {
         file << Parser::parseToPolynomialString(line.pCoefficients) << '\n';
         file << Parser::parseToCsvString(line.inputRange) << '\n';

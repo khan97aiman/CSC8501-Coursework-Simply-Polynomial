@@ -3,6 +3,8 @@
 #include <vector>
 
 namespace FileHandler {
+
+	std::string DIRECTORY = "files/";
 	//for reading
 	struct FileFormatCSV {
 		std::vector<int> outputSet;
