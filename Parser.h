@@ -9,5 +9,8 @@ public:
 
 	static std::string parseToCSV(const std::vector<int>& data);
 	static std::string parseToAlgExp(const std::vector<int>& coefficients);
+	
+	
+	static std::vector<int> parsePoly(std::string expression);
 };
 

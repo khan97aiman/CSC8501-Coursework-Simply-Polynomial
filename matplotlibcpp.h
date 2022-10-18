@@ -1,5 +1,6 @@
 #pragma once
 #define WITHOUT_NUMPY
+
 // Python headers must be included before any system headers, since
 // they define _POSIX_C_SOURCE
 #include <Python.h>

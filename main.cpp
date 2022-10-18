@@ -6,11 +6,15 @@
 #include <vector>
 #include "FileHandler.h"
 #include "Parser.h"
+#include "PolynomialEvaluator.h"
+#include "SimplyPolynomialSimulator.h"
 
-int main()
-{
-    std::cout << "Hello World!\n";
-    Parser::parseAlgExp("x^2+x-3x^-1");//("-2x^4 - 3x^2 - 6x + 87");
+
+int main() {
+    SimplyPolynomialSimulator pSimulator;
+    pSimulator.startUp();
+    pSimulator.mainMenu();
+    pSimulator.run();
 }
 #endif
 

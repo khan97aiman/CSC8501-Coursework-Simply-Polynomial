@@ -21,7 +21,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="CSC8501 Coursework - Polynomial.cpp">
+    <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="FileHandler.cpp">
@@ -44,6 +44,15 @@
     </ClCompile>
     <ClCompile Include="TestPolynomialEvaluator.cpp">
       <Filter>Test Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseSimulationHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EvaluationSimulationHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SimplyPolynomialSimulator.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -70,6 +79,15 @@
     </ClInclude>
     <ClInclude Include="matplotlibcpp.h">
       <Filter>Plotting Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="SimplyPolynomialSimulator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseSimulationHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EvaluationSimulationHandler.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
