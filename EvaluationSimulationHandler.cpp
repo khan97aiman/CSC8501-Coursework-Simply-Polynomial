@@ -6,7 +6,7 @@ void EvaluationSimulationHandler::getInput() {
 
 	std::cout << "Enter polynomial: " << "\n\t";
 	//check if polynomial is correct????
-	std::vector<int> coeff = Parser::parseCSV(handleUserInput());
+	std::vector<int> coeff = Parser::parsePolynomial(handleUserInput());
 
 	std::cout << "Enter start number of the input range: " << "\n\t";
 	//check for invalid input????
@@ -26,7 +26,9 @@ void EvaluationSimulationHandler::run() {
 }
 
 void EvaluationSimulationHandler::handleFileInput() {
-	
+	std::cout << "Please enter the name of the file you want to read from" << "\n";
+	std::string input = handleUserInput();
+
 	
 }
 

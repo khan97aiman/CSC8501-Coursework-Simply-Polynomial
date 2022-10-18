@@ -15,18 +15,18 @@ void BaseSimulationHandler::getInputMethod() {
 
 	std::string input = handleUserInput();
 	if (input == "1") getInput();
-	else if (input == "2") getFilenameForInput();
+	else if (input == "2") true;//getFilenameForInput();
 	else {
 		std::cout << "Invalid Command!" << '\n';
 		getInputMethod();
 	}
 }
-
-void BaseSimulationHandler::getFilenameForInput() {
-	std::cout << "Please enter the name of the file you want to read from" << "\n";
-	std::string input = handleUserInput();
-	
-}
+//
+//void BaseSimulationHandler::getFilenameForInput() {
+//	std::cout << "Please enter the name of the file you want to read from" << "\n";
+//	std::string input = handleUserInput();
+//	
+//}
 
 void BaseSimulationHandler::getFilenameForOutput() {
 	std::cout << "Please enter the name of the file to want to write to" << "\n";

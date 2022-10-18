@@ -4,8 +4,8 @@ class BaseSimulationHandler {
 public:
 	std::string handleUserInput();
 	void getInputMethod();
-	void getFilenameForInput();
-	void getFilenameForOutput();
+	//virtual void getFilenameForInput() = 0;
+	void getFilenameForOutput(); //also pure vvirtual
 	void viewOutputMethod();
 	
 	virtual void getInput() = 0;

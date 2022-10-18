@@ -6,38 +6,48 @@
 #include "ErrorMessages.h"
 #include "Parser.h"
 
-void FileHandler::checkFileExtension(std::string filename) {
-    std::string extension = ".csv";
+void FileHandler::checkFileExtension(const std::string& filename, const std::string& extension) {
     if (0 != filename.compare(filename.length() - extension.length(), extension.length(), extension)) {
         throw std::invalid_argument(INVALID_FILE_EXTENSION);
     }
 }
 
-std::vector<int> FileHandler::read(const std::string filename) {
-    std::string line;
-    std::ifstream file(filename);
-    if (file.is_open()) {
-        getline(file, line);
-        file.close();
-        return Parser::parseCSV(line);
-    }
-    else throw std::invalid_argument(INVALID_FILENAME);
- }
 
-std::vector<std::vector<int>> FileHandler::readBulk(const std::string filename) {
-    std::vector<std::vector<int>> data;
+FileHandler::FileFormatCSV FileHandler::CSV::readChunk(std::istream& file) {
+    FileHandler::FileFormatCSV data;
     std::string line;
+    getline(file, line);
+    data.outputSet = Parser::parseCSV(line);
+    getline(file, line);
+    data.inputRange = Parser::parseCSV(line);
+    getline(file, line);
+    data.numTerms = std::stoi(line);
+    return data;
+}
+
+FileHandler::FileFormatCSV FileHandler::CSV::read(const std::string& filename) {
     std::ifstream file(filename);
     if (file.is_open()) {
-        while (getline(file, line))
-            data.push_back(Parser::parseCSV(line));
+        FileHandler::FileFormatCSV data = readChunk(file);
         file.close();
-        return data;  
+        return data;
+    }
+    else throw std::invalid_argument(INVALID_FILENAME); //file not found
+}
+
+std::vector<FileHandler::FileFormatCSV> FileHandler::CSV::readBulk(const std::string& filename) {
+    std::vector<FileHandler::FileFormatCSV> data;
+    std::ifstream file(filename);
+    if (file.is_open()) {
+        while (!file.eof())
+            data.push_back(readChunk(file));
+        file.close();
+        return data;
     }
     else throw std::invalid_argument(INVALID_FILENAME);
 }
 
-void FileHandler::write(const std::string filename, const std::vector<int>& data) {
+void FileHandler::CSV::write(const std::string& filename, const std::vector<int>& data) {
     std::ofstream file;
     file.open(filename);
     for (const auto& value : data) 
@@ -45,13 +55,65 @@ void FileHandler::write(const std::string filename, const std::vector<int>& data
     file.close();
 }
 
-void FileHandler::writeBulk(const std::string filename, const std::vector<std::vector<int>>& data) {
+void FileHandler::CSV::writeBulk(const std::string& filename, const std::vector<std::vector<int>>& data) {
     std::ofstream file;
     file.open(filename);
     for (const auto& line : data) {
         for (const auto& value : line)
             file << value << ',';
         file << '\n';
+    }
+    file.close();
+}
+
+
+FileHandler::FileFormatEXP FileHandler::TXT::readChunk(std::istream& file){
+    FileHandler::FileFormatEXP data;
+    std::string line;
+    getline(file, line);
+    data.pCoefficients = Parser::parsePolynomial(line);
+    getline(file, line);
+    data.inputRange = Parser::parseCSV(line);
+    return data;
+}
+
+FileHandler::FileFormatEXP FileHandler::TXT::read(const std::string& filename) {
+    std::ifstream file(filename);
+    if (file.is_open()) {
+        FileHandler::FileFormatEXP data = readChunk(file);
+        file.close();
+        return data;
+    }
+    else throw std::invalid_argument(INVALID_FILENAME);
+}
+
+std::vector<FileHandler::FileFormatEXP> FileHandler::TXT::readBulk(const std::string& filename) {
+    std::vector<FileHandler::FileFormatEXP> data;
+    std::string line;
+    std::ifstream file(filename);
+    if (file.is_open()) {
+        while (!file.eof())
+            data.push_back(readChunk(file));
+        file.close();
+        return data;
+    }
+    else throw std::invalid_argument(INVALID_FILENAME);
+}
+
+void FileHandler::TXT::write(const std::string& filename, const FileFormatEXP& data) {
+    std::ofstream file;
+    file.open(filename);
+    file << Parser::parseToPolynomialString(data.pCoefficients) << '\n';
+    file << Parser::parseToCsvString(data.inputRange) << '\n';
+    file.close();
+}
+
+void FileHandler::TXT::writeBulk(const std::string& filename, const std::vector<FileFormatEXP>& data) {
+    std::ofstream file;
+    file.open(filename);
+    for (const auto& line : data) {
+        file << Parser::parseToPolynomialString(line.pCoefficients) << '\n';
+        file << Parser::parseToCsvString(line.inputRange) << '\n';
     }
     file.close();
 }

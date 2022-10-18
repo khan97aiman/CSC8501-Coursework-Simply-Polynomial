@@ -3,7 +3,15 @@
 #include <numeric> // std::inner_product
 
 Polynomial::Polynomial(std::vector<int> coefficients) {
-	this->coefficients = coefficients;
+	//get index of first non zero element
+	int index = 0;
+	for (; index < coefficients.size(); index++){
+		if (coefficients[index] > 0) 
+			break;
+	}
+	for (size_t i = index; i < coefficients.size(); i++) {
+		this->coefficients.push_back(coefficients[i]);
+	}
 }
 
 Polynomial::Polynomial(const Polynomial& p) {
