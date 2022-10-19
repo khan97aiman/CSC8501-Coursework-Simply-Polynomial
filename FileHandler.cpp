@@ -6,6 +6,10 @@
 #include "ErrorMessages.h"
 #include "Parser.h"
 
+//FILES END OF LINE SHOULD BE THE LAST LINE OTHERWISE CODE WILL BREAK
+
+std::string FileHandler::DIRECTORY = "files/";
+
 void FileHandler::checkFileExtension(const std::string& filename, const std::string& extension) {
     if (0 != filename.compare(filename.length() - extension.length(), extension.length(), extension)) {
         throw std::invalid_argument(INVALID_FILE_EXTENSION);
@@ -38,8 +42,9 @@ FileHandler::FileFormatCSV FileHandler::CSV::read(const std::string& filename) {
 std::vector<FileHandler::FileFormatCSV> FileHandler::CSV::readBulk(const std::string& filename) {
     std::vector<FileHandler::FileFormatCSV> data;
     std::ifstream file(DIRECTORY + filename);
+    std::string line;
     if (file.is_open()) {
-        while (!file.eof())
+        while (!file.eof()) 
             data.push_back(readChunk(file));
         file.close();
         return data;
@@ -92,7 +97,7 @@ std::vector<FileHandler::FileFormatEXP> FileHandler::TXT::readBulk(const std::st
     std::string line;
     std::ifstream file(DIRECTORY + filename);
     if (file.is_open()) {
-        while (!file.eof())
+        while (!file.eof()) 
             data.push_back(readChunk(file));
         file.close();
         return data;
@@ -104,7 +109,7 @@ void FileHandler::TXT::write(const std::string& filename, const FileFormatEXP& d
     std::ofstream file;
     file.open(DIRECTORY + filename);
     file << Parser::parseToPolynomialString(data.pCoefficients) << '\n';
-    file << Parser::parseToCsvString(data.inputRange) << '\n';
+    file << Parser::parseToCsvString(data.inputRange);
     file.close();
 }
 
@@ -113,7 +118,8 @@ void FileHandler::TXT::writeBulk(const std::string& filename, const std::vector<
     file.open(DIRECTORY + filename);
     for (const auto& line : data) {
         file << Parser::parseToPolynomialString(line.pCoefficients) << '\n';
-        file << Parser::parseToCsvString(line.inputRange) << '\n';
+        file << Parser::parseToCsvString(line.inputRange);
+        if (&line != &data.back()) file << '\n';
     }
     file.close();
 }

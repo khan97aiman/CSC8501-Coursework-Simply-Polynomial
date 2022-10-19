@@ -17,12 +17,15 @@ std::vector<std::string> Parser::PolynomialHelper::tokenize(const std::string& e
     std::string token;
     std::vector<std::string> tokens;
     while (getline(stream, token, delimiter)) {
-        tokens.push_back(token);
+        if (token.size())
+            tokens.push_back(token);
     }
     return tokens;
 }
 
+//MORE THAN 10 LINES OF CODE MODIFY IT
 void Parser::PolynomialHelper::termLexing(std::vector<std::string>& tokens) {
+    //adds x^0 to constant terms, ^1 to x term, and 
     for (auto& token : tokens) {
         //if token does not contain x
         if (token.find('x') == std::string::npos) {
@@ -32,9 +35,11 @@ void Parser::PolynomialHelper::termLexing(std::vector<std::string>& tokens) {
         else if (token.find('^') == std::string::npos) {
             token += "^1";
         }
-        else {
-            if (token.find('x') == 0) token = "1" + token;
-        }
+        //if x is the first char
+        if (token.find('x') == 0) token = "1" + token;
+
+        //if -x are first characters
+        if (token.find('-') == 0 && token.find('x') == 1) token.insert(1, "1");
     }
 }
 
@@ -46,8 +51,7 @@ std::vector<int> Parser::PolynomialHelper::extractCoefficents(const std::vector<
         std::string coefficient, exponent;
         std::getline(tokenStream, coefficient, 'x');
         std::getline(tokenStream, exponent, 'x');
-        
-        //reverse this order x^2 should be 1,0,0 not 0,0,1
+
         coefficients[4 - (exponent[1] - '0')] += std::stoi(coefficient);
     }
     return coefficients;
@@ -85,12 +89,20 @@ std::string Parser::parseToCsvString(const std::vector<int>& data) {
     return stringCSV;
 }
 
+
+//MORE THAN 10 LINES OF CODE
 std::string Parser::parseToPolynomialString(const std::vector<int>& coefficients) {
     std::string polynomial;
     int exp{ (int)coefficients.size() - 1};
     for (const auto& coeff : coefficients) {
         if (coeff) {
-            exp > 1 ? polynomial += coeff + "x^" + exp : exp ? polynomial += coeff + 'x' : polynomial += coeff;
+            //update this line, because 0, 0, 1, 0, 0 prints +x^2 and not x^2
+            if (coeff > 0 && &coeff != &coefficients.front()) polynomial += '+';
+            std::string c;
+            if (coeff == 1 && &coeff != &coefficients.back()) c = "";
+            else if (coeff == -1) c = "-";
+            else c = std::to_string(coeff);
+            exp > 1 ? polynomial += c + "x^" + std::to_string(exp) : exp ? polynomial += c + 'x' : polynomial += c;
         }
         exp--;
     }

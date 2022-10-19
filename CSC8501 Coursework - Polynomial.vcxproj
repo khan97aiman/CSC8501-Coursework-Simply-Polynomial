@@ -142,6 +142,7 @@
     <ClCompile Include="PolynomialEvaluator.cpp" />
     <ClCompile Include="SimplyPolynomialSimulator.cpp" />
     <ClCompile Include="TestFileHandler.cpp" />
+    <ClCompile Include="TestParser.cpp" />
     <ClCompile Include="TestPolynomial.cpp" />
     <ClCompile Include="TestPolynomialEvaluator.cpp" />
   </ItemGroup>

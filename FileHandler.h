@@ -3,19 +3,32 @@
 #include <vector>
 
 namespace FileHandler {
+	extern std::string DIRECTORY;
 
-	std::string DIRECTORY = "files/";
-	//for reading
+	//csv (output set) file format for reading only
 	struct FileFormatCSV {
 		std::vector<int> outputSet;
 		std::vector<int> inputRange;
 		int numTerms{ 0 };
+		
+		FileFormatCSV() {};
+		FileFormatCSV(std::vector<int> outputSet, std::vector<int> inputRange, int numTerms) {
+			this->outputSet = outputSet;
+			this->inputRange = inputRange;
+			this->numTerms = numTerms;
+		}
 	};
 
 	//expression file format (read/write both)
 	struct FileFormatEXP {
 		std::vector<int> pCoefficients;
 		std::vector<int> inputRange;
+
+		FileFormatEXP() {};
+		FileFormatEXP(std::vector<int> pCoefficients, std::vector<int> inputRange) {
+			this->pCoefficients = pCoefficients;
+			this->inputRange = inputRange;
+		}
 	};
 
 	void checkFileExtension(const std::string& filename, const std::string& extension);

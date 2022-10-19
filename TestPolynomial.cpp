@@ -5,6 +5,12 @@
 #include "doctest.h"
 #include "Polynomial.h"
 
+TEST_CASE("Polynomial: Construction") {
+    Polynomial p1(std::vector<int>({ 0, 0, 2,4,9 }));
+    Polynomial p2(std::vector<int>({ 2,4,9 }));
+    CHECK(p1 == p2);
+}
+
 TEST_CASE("Polynomial: Assignment(Copy) and Equality") {
     Polynomial p1(std::vector<int>({ 2,4,9 }));
     Polynomial p2 = p1;
