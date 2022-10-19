@@ -2,7 +2,7 @@
 #include "Polynomial.h"
 #include <iostream>
 class PolynomialEvaluator {
-	Polynomial* polynomial;
+	Polynomial* polynomial = NULL;
 	std::vector<int> inputSet;
 	std::vector<int> outputSet;
 public:
