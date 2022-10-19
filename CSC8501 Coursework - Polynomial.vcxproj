@@ -135,6 +135,7 @@
   <ItemGroup>
     <ClCompile Include="BaseSimulationHandler.cpp" />
     <ClCompile Include="EvaluationSimulationHandler.cpp" />
+    <ClCompile Include="HelperFunctions.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="FileHandler.cpp" />
     <ClCompile Include="Parser.cpp" />
@@ -152,6 +153,7 @@
     <ClInclude Include="ErrorMessages.h" />
     <ClInclude Include="EvaluationSimulationHandler.h" />
     <ClInclude Include="FileHandler.h" />
+    <ClInclude Include="HelperFunctions.h" />
     <ClInclude Include="matplotlibcpp.h" />
     <ClInclude Include="Parser.h" />
     <ClInclude Include="Polynomial.h" />

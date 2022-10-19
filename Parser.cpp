@@ -3,7 +3,8 @@
 #include <fstream>
 #include <iostream>
 #include <regex>
-
+#include "HelperFunctions.h"
+#include "ErrorMessages.h"
 
 void Parser::PolynomialHelper::polynomialLexing(std::string& expression, char delimiter) {
     auto i = expression.begin();
@@ -71,10 +72,12 @@ std::vector<int> Parser::parseCSV(const std::string& line)
 
 std::vector<int> Parser::parsePolynomial(const std::string& expression) {
     std::string pExpression = std::regex_replace(expression, std::regex("\\s+"), "");
+    if (!isPolynomialValid(pExpression)) 
+        throw std::invalid_argument(INVALID_POLYNOMIAL);
+    
     PolynomialHelper::polynomialLexing(pExpression, '+');
     std::vector<std::string> tokens = PolynomialHelper::tokenize(pExpression, '+');
     PolynomialHelper::termLexing(tokens);
-    //check if polynomial is valid???? should i check in polynomial class?? yes
     return PolynomialHelper::extractCoefficents(tokens);
 }
 

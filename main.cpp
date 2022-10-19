@@ -15,10 +15,10 @@ int main() {
     pSimulator.startUp();
     pSimulator.mainMenu();
     pSimulator.run();
-    /*std::vector<int> p = Parser::parsePolynomial("2x^4 + 3x^2 - 6x + 87");
-    for (const auto& i : p) {
-        std::cout << i << ',';
-    }*/
+
+    std::cout << "Destructing all objects" << '\n';
+    std::cout << "-----------------------------------------" << '\n';
+
 }
 #endif
 

@@ -29,6 +29,23 @@ TEST_CASE("Parser: parsePolynomial()") {
     CHECK(std::vector<int>{-3, -9, -1, 2, 20} == Parser::parsePolynomial(p4));
 }
 
+TEST_CASE("Parser: Invalid Inputs - parsePolynomial()") {
+    std::string p0{ "x^2 *" };
+    CHECK_THROWS_AS(Parser::parsePolynomial(p0), const std::exception&);
+
+    std::string p1{ "1.2x^2" };
+    CHECK_THROWS_AS(Parser::parsePolynomial(p1), const std::exception&);
+
+    std::string p2{ "x^-2" };
+    CHECK_THROWS_AS(Parser::parsePolynomial(p2), const std::exception&);
+
+    std::string p3{ "x^2 + A" };
+    CHECK_THROWS_AS(Parser::parsePolynomial(p3), const std::exception&);
+
+    std::string p4{ "y^2" };
+    CHECK_THROWS_AS(Parser::parsePolynomial(p4), const std::exception&);
+}
+
 TEST_CASE("Parser: parseToCsvString()") {
     std::string output{ "1,2,3,4,5" };
     CHECK(output == Parser::parseToCsvString(std::vector<int>{ 1, 2, 3, 4, 5 }));

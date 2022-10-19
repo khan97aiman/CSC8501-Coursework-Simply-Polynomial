@@ -6,7 +6,9 @@
 #include "ErrorMessages.h"
 #include "Parser.h"
 
+//REMOVE READ/WRITE FUNCTIONS ---- ONLY WORK WITH BULK, THIS WILL ALSO SOLVE THE PROBLEM BELOW
 //FILES END OF LINE SHOULD BE THE LAST LINE OTHERWISE CODE WILL BREAK
+//WHAT IF NO FILE EXTENSION IN WRITE FUNCTION???
 
 std::string FileHandler::DIRECTORY = "files/";
 
@@ -36,7 +38,7 @@ FileHandler::FileFormatCSV FileHandler::CSV::read(const std::string& filename) {
         file.close();
         return data;
     }
-    else throw std::invalid_argument(INVALID_FILENAME); //file not found
+    else throw std::invalid_argument(FILE_NOT_FOUND); //file not found
 }
 
 std::vector<FileHandler::FileFormatCSV> FileHandler::CSV::readBulk(const std::string& filename) {
@@ -49,7 +51,7 @@ std::vector<FileHandler::FileFormatCSV> FileHandler::CSV::readBulk(const std::st
         file.close();
         return data;
     }
-    else throw std::invalid_argument(INVALID_FILENAME);
+    else throw std::invalid_argument(FILE_NOT_FOUND);
 }
 
 void FileHandler::CSV::write(const std::string& filename, const std::vector<int>& data) {
@@ -89,7 +91,7 @@ FileHandler::FileFormatEXP FileHandler::TXT::read(const std::string& filename) {
         file.close();
         return data;
     }
-    else throw std::invalid_argument(INVALID_FILENAME);
+    else throw std::invalid_argument(FILE_NOT_FOUND);
 }
 
 std::vector<FileHandler::FileFormatEXP> FileHandler::TXT::readBulk(const std::string& filename) {
@@ -102,7 +104,7 @@ std::vector<FileHandler::FileFormatEXP> FileHandler::TXT::readBulk(const std::st
         file.close();
         return data;
     }
-    else throw std::invalid_argument(INVALID_FILENAME);
+    else throw std::invalid_argument(FILE_NOT_FOUND);
 }
 
 void FileHandler::TXT::write(const std::string& filename, const FileFormatEXP& data) {
