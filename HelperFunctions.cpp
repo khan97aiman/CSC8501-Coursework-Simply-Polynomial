@@ -19,3 +19,7 @@ bool isPolynomialValid(std::string polynomialString) {
 	std::regex pattern("^([-+]?([0-9]+)?(x(\\^[+]?[0-9]+)?)?)+");
 	return std::regex_match(polynomialString, pattern);
 }
+
+bool isConstant(const std::vector<int>& v) {
+	return std::adjacent_find(v.begin() + 1, v.end(), std::not_equal_to<>()) == v.end();
+ }

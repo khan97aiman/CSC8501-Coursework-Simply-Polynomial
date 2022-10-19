@@ -9,6 +9,7 @@ class PolynomialFitter {
 	std::vector<int> inputSet;
 	int numTerms {0};
 public:
+	int determineDegree();
 	PolynomialFitter(std::vector<int> outputSet, int startInputRange, int endInputRange, int numTerms);
 	PolynomialFitter(std::vector<int> outputSet, int startInputRange, int endInputRange);
 	PolynomialFitter(std::vector<int> outputSet);

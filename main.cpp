@@ -3,10 +3,6 @@
 #ifndef RUN_TESTS
 
 #include <iostream>
-#include <vector>
-#include "FileHandler.h"
-#include "Parser.h"
-#include "PolynomialEvaluator.h"
 #include "SimplyPolynomialSimulator.h"
 
 
@@ -18,7 +14,6 @@ int main() {
 
     std::cout << "Destructing all objects" << '\n';
     std::cout << "-----------------------------------------" << '\n';
-
 }
 #endif
 

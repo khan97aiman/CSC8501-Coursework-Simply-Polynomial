@@ -141,11 +141,13 @@
     <ClCompile Include="Parser.cpp" />
     <ClCompile Include="Polynomial.cpp" />
     <ClCompile Include="PolynomialEvaluator.cpp" />
+    <ClCompile Include="PolynomialFitter.cpp" />
     <ClCompile Include="SimplyPolynomialSimulator.cpp" />
     <ClCompile Include="TestFileHandler.cpp" />
     <ClCompile Include="TestParser.cpp" />
     <ClCompile Include="TestPolynomial.cpp" />
     <ClCompile Include="TestPolynomialEvaluator.cpp" />
+    <ClCompile Include="TestPolynomialFitter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseSimulationHandler.h" />
@@ -158,6 +160,7 @@
     <ClInclude Include="Parser.h" />
     <ClInclude Include="Polynomial.h" />
     <ClInclude Include="PolynomialEvaluator.h" />
+    <ClInclude Include="PolynomialFitter.h" />
     <ClInclude Include="SimplyPolynomialSimulator.h" />
     <ClInclude Include="TestLoader.h" />
   </ItemGroup>
