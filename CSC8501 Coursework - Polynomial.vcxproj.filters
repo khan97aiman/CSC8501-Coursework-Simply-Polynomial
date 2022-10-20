@@ -66,6 +66,9 @@
     <ClCompile Include="TestPolynomialFitter.cpp">
       <Filter>Test Files</Filter>
     </ClCompile>
+    <ClCompile Include="FittingSimulationHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FileHandler.h">
@@ -105,6 +108,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PolynomialFitter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FittingSimulationHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

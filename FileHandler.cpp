@@ -23,11 +23,11 @@ FileHandler::FileFormatCSV FileHandler::CSV::readChunk(std::istream& file) {
     FileHandler::FileFormatCSV data;
     std::string line;
     getline(file, line);
-    data.outputSet = Parser::parseCSV(line);
+    data.outputSet = Parser::parseCSV(line); //DONT ACCEPT UNKNOWN HERE
     getline(file, line);
-    data.inputRange = Parser::parseCSV(line);
+    if (line != "UNKNOWN") data.inputRange = Parser::parseCSV(line);
     getline(file, line);
-    data.numTerms = std::stoi(line);
+    if(line != "UNKNOWN") data.numTerms = std::stoi(line);
     return data;
 }
 

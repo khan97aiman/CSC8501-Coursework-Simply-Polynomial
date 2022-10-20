@@ -8,7 +8,7 @@ namespace FileHandler {
 	//csv (output set) file format for reading only
 	struct FileFormatCSV {
 		std::vector<int> outputSet;
-		std::vector<int> inputRange;
+		std::vector<int> inputRange {0,0};
 		int numTerms{ 0 };
 		
 		FileFormatCSV() {};
