@@ -8,6 +8,9 @@ class PolynomialFitter {
 	std::vector<int> outputSet;
 	std::vector<int> inputSet;
 	int numTerms {0};
+
+	//helper functions
+	void fitGivenInputSet();
 public:
 	int determineDegree();
 	PolynomialFitter(std::vector<int> outputSet, int startInputRange, int endInputRange, int numTerms);

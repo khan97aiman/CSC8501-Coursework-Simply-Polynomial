@@ -2,6 +2,19 @@
 #include <numeric>   
 #include "HelperFunctions.h"
 
+void PolynomialFitter::fitGivenInputSet() {
+	std::vector<std::vector<double>> A; // DOUBLE OR INT
+	int degree{ determineDegree() };
+	for (const auto& x: inputSet) {
+		std::vector<double> row;
+		for (int exp{ degree }; exp >= 0; exp--)
+			row.push_back((int)pow(x, exp));
+		A.push_back(row);
+	}
+	std::vector<int> coefficients = mult(mult(inverse(mult(transpose(A), A)), transpose(A)), outputSet);
+	polynomial = new Polynomial(coefficients);
+}
+
 int PolynomialFitter::determineDegree() {
 	int degree{ 0 };
 	std::vector<int> differential { outputSet };
@@ -38,6 +51,7 @@ PolynomialFitter::PolynomialFitter(std::vector<int> outputSet) {
 }
 
 void PolynomialFitter::fit() {
+	fitGivenInputSet();
 }
 
 PolynomialFitter::~PolynomialFitter() {
