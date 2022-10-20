@@ -16,10 +16,10 @@ namespace Parser {
 		void termLexing(std::vector<std::string>& tokens);  
 		std::vector<int> extract(const std::vector<std::string>& tokens);
 	}
-	
 	std::vector<int> parseCSV(const std::string& line);
 	std::vector<int> parsePolynomial(const std::string& expression);
 	std::string parseToCsvString(const std::vector<int>& data);
+	void parseToPolynomialTerm(const int& coeff, const int& exp, std::string& polynomial, const std::vector<int>& coefficients);
 	std::string parseToPolynomialString(const std::vector<int>& coefficients);
 };
 

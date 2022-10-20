@@ -3,7 +3,6 @@
 #include <numeric> // std::inner_product
 
 Polynomial::Polynomial(std::vector<int> coefficients) {
-	//CHECK COEFFICIENT RANGES 
 	//get index of first non zero element
 	int index = 0;
 	for (; index < coefficients.size(); index++){

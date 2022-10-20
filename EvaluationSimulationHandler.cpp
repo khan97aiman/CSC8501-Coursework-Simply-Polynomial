@@ -20,7 +20,6 @@ void EvaluationSimulationHandler::run() {
 }
 
 EvaluationSimulationHandler::~EvaluationSimulationHandler() {
-	std::cout << "destructing evaluation sim handler" << '\n';
 	for (const auto& i : pEvaluators) {
 		delete i;
 	}
@@ -29,7 +28,7 @@ EvaluationSimulationHandler::~EvaluationSimulationHandler() {
 void EvaluationSimulationHandler::getInputFromFile() {
 	std::cout << "Filename: ";
 	std::string filename = handleUserInput(false);
-	std::vector<FileHandler::FileFormatEXP> data = FileHandler::TXT::readBulk(filename);
+	std::vector<FileHandler::FileFormatEXP> data = FileHandler::TXT::read(filename);
 
 	for (const auto& e : data) {
 		pEvaluators.push_back(new PolynomialEvaluator(e.pCoefficients, e.inputRange[0], e.inputRange[1]));
@@ -49,7 +48,7 @@ void EvaluationSimulationHandler::writeOutputToFile() {
 	for (const auto& e : pEvaluators) {
 		output.push_back(e->getOutput());
 	}
-	FileHandler::CSV::writeBulk(filename, output);
+	FileHandler::CSV::write(filename, output);
 	std::cout << "-----------------------------------------------------------------" << '\n';
 	std::cout << "Your output has been written to " << filename << '\n';
 	std::cout << "-----------------------------------------------------------------" << '\n';

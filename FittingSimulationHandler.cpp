@@ -40,7 +40,7 @@ FittingSimulationHandler::~FittingSimulationHandler() {
 void FittingSimulationHandler::getInputFromFile() {
 	std::cout << "Filename: ";
 	std::string filename = handleUserInput(false);
-	std::vector<FileHandler::FileFormatCSV> data = FileHandler::CSV::readBulk(filename);
+	std::vector<FileHandler::FileFormatCSV> data = FileHandler::CSV::read(filename);
 
 	for (const auto& e : data) {
 		pFitters.push_back(new PolynomialFitter(e.outputSet, e.inputRange[0], e.inputRange[1], e.numTerms)); //?????????????????????????
@@ -61,7 +61,7 @@ void FittingSimulationHandler::writeOutputToFile() {
 	for (const auto& e : pFitters) {
 		//output.push_back(e->getOutput());
 	}
-	FileHandler::CSV::writeBulk(filename, output);
+	FileHandler::CSV::write(filename, output);
 	std::cout << "-----------------------------------------------------------------" << '\n';
 	std::cout << "Your output has been written to " << filename << '\n';
 	std::cout << "-----------------------------------------------------------------" << '\n';

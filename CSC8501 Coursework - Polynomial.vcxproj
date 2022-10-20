@@ -152,6 +152,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseSimulationHandler.h" />
+    <ClInclude Include="Constants.h" />
     <ClInclude Include="doctest.h" />
     <ClInclude Include="ErrorMessages.h" />
     <ClInclude Include="EvaluationSimulationHandler.h" />

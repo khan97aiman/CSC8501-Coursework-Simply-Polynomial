@@ -2,8 +2,8 @@
 #include <iostream>
 #include <regex>
 #include <numeric> // std::inner_product
+#include "Constants.h"
 
-int MAX_POLYNOMIAL_DEGREE = 4;
 
 std::string handleUserInput(bool prompt) {
 	if (prompt) std::cout << "Waiting for your input: ";
@@ -71,7 +71,7 @@ std::vector<int> mult(const std::vector<std::vector<double>>& matrix, const std:
     return result;
 }
 
-//NOT MY FUNCTIONS
+//From stackoverflow
 double determinant(const std::vector<std::vector<double>>& vect) {
     if (vect.size() != vect[0].size()) {
         throw std::invalid_argument("Matrix is not quadratic");

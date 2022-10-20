@@ -5,6 +5,7 @@
 #include <regex>
 #include "HelperFunctions.h"
 #include "ErrorMessages.h"
+#include "Constants.h"
 
 void Parser::PolynomialHelper::polynomialLexing(std::string& expression, char delimiter) {
     auto i = expression.begin();
@@ -24,27 +25,19 @@ std::vector<std::string> Parser::PolynomialHelper::tokenize(const std::string& e
     return tokens;
 }
 
-//MORE THAN 10 LINES OF CODE MODIFY IT
 void Parser::PolynomialHelper::termLexing(std::vector<std::string>& tokens) {
-    //adds x^0 to constant terms, ^1 to x term, and 
     for (auto& token : tokens) {
-        //if token does not contain x
-        if (token.find('x') == std::string::npos) {
+        if (token.find('x') == std::string::npos)  //if token does not contain x (constant term)
             token += "x^0";
-        }
-        //if token does not contain ^
-        else if (token.find('^') == std::string::npos) {
+        else if (token.find('^') == std::string::npos) //if token does not contain ^ (x term)
             token += "^1";
-        }
-        //if x is the first char
-        if (token.find('x') == 0) token = "1" + token;
-
-        //if -x are first characters
-        if (token.find('-') == 0 && token.find('x') == 1) token.insert(1, "1");
+        if (token.find('x') == 0) //if x is the first char (missing 1 as coefficient)
+            token = "1" + token;
+        else if (token.find("-x") != std::string::npos) //if -x are first characters (missing 1 as coefficient)
+            token.insert(1, "1"); 
     }
 }
 
-//MORE THAN 10 LINES OF CODE
 std::vector<int> Parser::PolynomialHelper::extract(const std::vector<std::string>& tokens) {
     std::vector<int> coefficients(MAX_POLYNOMIAL_DEGREE + 1, 0);
     for (const auto& token : tokens) {
@@ -93,21 +86,25 @@ std::string Parser::parseToCsvString(const std::vector<int>& data) {
     return stringCSV;
 }
 
+void Parser::parseToPolynomialTerm(const int& coeff, const int& exp, std::string& polynomial, const std::vector<int>& coefficients) {
+    if (coeff > 0 && &coeff != &coefficients.front()) 
+        polynomial += '+';
+    std::string c;
+    if (coeff == 1 && exp != 0) 
+        c = "";
+    else if (coeff == -1 && exp != 0)
+        c = "-";
+    else 
+        c = std::to_string(coeff);
+    exp > 1 ? polynomial += c + "x^" + std::to_string(exp) : exp ? polynomial += c + 'x' : polynomial += c;
+}
 
-//MORE THAN 10 LINES OF CODE
 std::string Parser::parseToPolynomialString(const std::vector<int>& coefficients) {
     std::string polynomial;
     int exp{ (int)coefficients.size() - 1};
     for (const auto& coeff : coefficients) {
-        if (coeff) {
-            //update this line, because 0, 0, 1, 0, 0 prints +x^2 and not x^2
-            if (coeff > 0 && &coeff != &coefficients.front()) polynomial += '+';
-            std::string c;
-            if (coeff == 1 && &coeff != &coefficients.back()) c = "";
-            else if (coeff == -1) c = "-";
-            else c = std::to_string(coeff);
-            exp > 1 ? polynomial += c + "x^" + std::to_string(exp) : exp ? polynomial += c + 'x' : polynomial += c;
-        }
+        if (coeff) 
+            parseToPolynomialTerm(coeff, exp, polynomial, coefficients);
         exp--;
     }
     return polynomial;

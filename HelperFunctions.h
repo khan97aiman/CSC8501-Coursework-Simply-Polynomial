@@ -3,8 +3,6 @@
 #include <vector>
 #include <algorithm>
 
-extern int MAX_POLYNOMIAL_DEGREE;
-
 std::string handleUserInput(bool prompt = true);
 void handleInvalidInput();
 void handleException(const std::exception& e);
@@ -12,7 +10,6 @@ bool isPolynomialValid(std::string polynomialString);
 bool isPolynomialValid(std::vector<int> coefficients);
 bool isConstant(const std::vector<int>& v);
 
-//USE TEMPLATES HERE???
 std::vector<std::vector<double>> mult(const std::vector<std::vector<double>>& matrix1, const std::vector<std::vector<double>>& matrix2);
 std::vector<int> mult(const std::vector<std::vector<double>>& matrix, const std::vector<int>& vect);
 

@@ -28,30 +28,24 @@ bool compare_files(const std::string& filename1, const std::string& filename2)
     return std::equal(begin1, std::istreambuf_iterator<char>(), begin2); //Second argument is end-of-range iterator
 }
 
-TEST_CASE("FileHandler::CSV writeBulk()") {
+TEST_CASE("FileHandler::CSV write()") {
     std::vector< std::vector<int>> wData = {
         {1, 2, 3, 5, 6},
         {4, 5, 6},
         {7, 8, 9, 2}
     };
-    FileHandler::CSV::writeBulk("test_writeBulk.csv", wData);
+    FileHandler::CSV::write("test_writeBulk.csv", wData);
     CHECK(compare_files("writeBulk.csv", "test_writeBulk.csv"));
 }
 
-TEST_CASE("FileHandler::CSV write()") {
-    std::vector<int> wData = { 1, 2, 3, 5, 6 };
-    FileHandler::CSV::write("test_write.csv", wData);
-    CHECK(compare_files("write.csv", "test_write.csv"));
-}
-
-TEST_CASE("FileHandler::CSV readBulk()") {
+TEST_CASE("FileHandler::CSV read()") {
 
     std::vector<FileHandler::FileFormatCSV> obj{
         FileHandler::FileFormatCSV(std::vector<int> { 1, 4, 9, 16, 25 }, std::vector<int> { 1, 5}, 1),
         FileHandler::FileFormatCSV(std::vector<int> { 2, 5, 10, 17, 26 }, std::vector<int> { 1, 5}, 2),
     };
 
-    std::vector<FileHandler::FileFormatCSV> test = FileHandler::CSV::readBulk("readBulk.csv");
+    std::vector<FileHandler::FileFormatCSV> test = FileHandler::CSV::read("readBulk.csv");
 
     for (size_t i = 0; i < test.size(); i++) {
         CHECK(test[i].outputSet == obj[i].outputSet);
@@ -61,32 +55,12 @@ TEST_CASE("FileHandler::CSV readBulk()") {
 
 }
 
-TEST_CASE("FileHandler::CSV read()") {
-    std::vector<int> outputSet = { 1, 4, 9, 16, 25 };
-    std::vector<int> inputRange{ 1,5 };
-    int numTerms{ 1 };
-    FileHandler::FileFormatCSV test = FileHandler::CSV::read("read.csv");
-    
-    CHECK(test.outputSet == outputSet);
-    CHECK(test.inputRange == inputRange);
-    CHECK(test.numTerms == numTerms);
-}
-
 TEST_CASE("FileHandler::CSV reading invalid file with read()") {
     CHECK_THROWS_AS(FileHandler::CSV::read("invalidFile.csv"), const std::exception&);
 }
 
-TEST_CASE("FileHandler::CSV reading invalid file with readBulk()") {
-    CHECK_THROWS_AS(FileHandler::CSV::readBulk("invalidFile.csv"), const std::exception&);
-}
-
-
 TEST_CASE("FileHandler::TXT reading invalid file with read()") {
     CHECK_THROWS_AS(FileHandler::TXT::read("invalidFile.csv"), const std::exception&);
-}
-
-TEST_CASE("FileHandler::TXT reading invalid file with readBulk()") {
-    CHECK_THROWS_AS(FileHandler::TXT::readBulk("invalidFile.csv"), const std::exception&);
 }
 
 TEST_CASE("FileHandler: filenames with invalid extensions") {
@@ -103,34 +77,21 @@ TEST_CASE("FileHandler: filenames with invalid extensions") {
     CHECK_THROWS_AS(FileHandler::checkFileExtension("invalidFile.txt.ttxt", ".txt"), const std::exception&);
 }
 
-TEST_CASE("FileHandler::TXT writeBulk()/readBulk()") {
+TEST_CASE("FileHandler::TXT write()/read()") {
 
     std::vector<FileHandler::FileFormatEXP> obj{
         FileHandler::FileFormatEXP(std::vector<int> { 0, 0, 1, 0, 0 }, std::vector<int> { 1, 5}),
         FileHandler::FileFormatEXP(std::vector<int> { 0, 0, 1, 0, 1 }, std::vector<int> { 1, 5}),
     };
 
-    FileHandler::TXT::writeBulk("test_writeBulk.txt", obj);
+    FileHandler::TXT::write("test_writeBulk.txt", obj);
     CHECK(compare_files("writeBulk.txt", "test_writeBulk.txt"));
 
-    std::vector<FileHandler::FileFormatEXP> test = FileHandler::TXT::readBulk("test_writeBulk.txt");
+    std::vector<FileHandler::FileFormatEXP> test = FileHandler::TXT::read("test_writeBulk.txt");
     for (size_t i = 0; i < test.size(); i++) {
         CHECK(test[i].pCoefficients == obj[i].pCoefficients);
         CHECK(test[i].inputRange == obj[i].inputRange);
     }
-}
-
-TEST_CASE("FileHandler::TXT write()/read()") {
-
-    FileHandler::FileFormatEXP obj(std::vector<int> {0, 0, 1, 0, 0 }, std::vector<int> { 1, 5});
-
-    FileHandler::TXT::write("test_write.txt", obj);
-    CHECK(compare_files("write.txt", "test_write.txt"));
-
-    FileHandler::FileFormatEXP test = FileHandler::TXT::read("test_write.txt");
-    CHECK(test.pCoefficients == obj.pCoefficients);
-    CHECK(test.inputRange == obj.inputRange);
-    
 }
 
 #endif
