@@ -16,9 +16,6 @@
     <Filter Include="Test Files">
       <UniqueIdentifier>{1d33f5a2-3f2c-4edf-a27a-e816b7fe0eb4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Plotting Tools">
-      <UniqueIdentifier>{cf936b78-6058-4052-9c91-51243e72a050}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -91,9 +88,6 @@
     </ClInclude>
     <ClInclude Include="Parser.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="matplotlibcpp.h">
-      <Filter>Plotting Tools</Filter>
     </ClInclude>
     <ClInclude Include="SimplyPolynomialSimulator.h">
       <Filter>Header Files</Filter>

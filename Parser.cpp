@@ -44,22 +44,22 @@ void Parser::PolynomialHelper::termLexing(std::vector<std::string>& tokens) {
     }
 }
 
-//this function extracts coefficient and exponent information from expression tokens
-std::vector<int> Parser::PolynomialHelper::extractCoefficents(const std::vector<std::string>& tokens) {
-    std::vector<int> coefficients(5, 0);; //5 depends of max poly degree (4 degree corresponds to 5 terms) //change this to maximum exponent of the poly string
+//MORE THAN 10 LINES OF CODE
+std::vector<int> Parser::PolynomialHelper::extract(const std::vector<std::string>& tokens) {
+    std::vector<int> coefficients(MAX_POLYNOMIAL_DEGREE + 1, 0);
     for (const auto& token : tokens) {
         std::stringstream tokenStream(token);
         std::string coefficient, exponent;
-        std::getline(tokenStream, coefficient, 'x');
+        std::getline(tokenStream, coefficient, 'x'); 
         std::getline(tokenStream, exponent, 'x');
-
-        coefficients[4 - (exponent[1] - '0')] += std::stoi(coefficient);
+        int exp = std::stoi(exponent.substr(1));
+        if (exp > 4) throw std::invalid_argument(INVALID_POLYNOMIAL_RANGE);
+        coefficients[MAX_POLYNOMIAL_DEGREE - exp] += std::stoi(coefficient);
     }
     return coefficients;
 }
 
-std::vector<int> Parser::parseCSV(const std::string& line)
-{
+std::vector<int> Parser::parseCSV(const std::string& line) {
     std::istringstream linestream(line);
     std::string item;
     std::vector<int> data;
@@ -67,7 +67,6 @@ std::vector<int> Parser::parseCSV(const std::string& line)
         data.push_back(std::stoi(item));
     }
     return data;
-    //if data is not integer, handle invalid inputs in file, that is already handled by stoi, just catch it in main
 }
 
 std::vector<int> Parser::parsePolynomial(const std::string& expression) {
@@ -78,10 +77,12 @@ std::vector<int> Parser::parsePolynomial(const std::string& expression) {
     PolynomialHelper::polynomialLexing(pExpression, '+');
     std::vector<std::string> tokens = PolynomialHelper::tokenize(pExpression, '+');
     PolynomialHelper::termLexing(tokens);
-    return PolynomialHelper::extractCoefficents(tokens);
+    std::vector<int> coefficients = PolynomialHelper::extract(tokens);
+    if (!isPolynomialValid(coefficients))
+        throw std::invalid_argument(INVALID_POLYNOMIAL_RANGE);
+    return coefficients;
 }
 
-//parses to CSV String so that it can be outputted to console, change the name ???
 std::string Parser::parseToCsvString(const std::vector<int>& data) {
     std::string stringCSV;
     for (const auto& i : data) {

@@ -7,11 +7,8 @@ class PolynomialEvaluator {
 	std::vector<int> outputSet;
 public:
 	PolynomialEvaluator(std::vector<int> coefficients, int startInputRange, int endInputRange);
-	std::vector<int> evaluate(); //change to void???
+	void evaluate();
 	std::vector<int> getOutput() { return outputSet; }
-	~PolynomialEvaluator() {
-		delete polynomial;
-	}
-	//void plot();
+	~PolynomialEvaluator();
 };
 

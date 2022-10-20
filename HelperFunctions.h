@@ -3,9 +3,13 @@
 #include <vector>
 #include <algorithm>
 
+extern int MAX_POLYNOMIAL_DEGREE;
+
 std::string handleUserInput(bool prompt = true);
 void handleInvalidInput();
+void handleException(const std::exception& e);
 bool isPolynomialValid(std::string polynomialString);
+bool isPolynomialValid(std::vector<int> coefficients);
 bool isConstant(const std::vector<int>& v);
 
 //USE TEMPLATES HERE???

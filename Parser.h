@@ -5,10 +5,16 @@
 namespace Parser {
 
 	namespace PolynomialHelper {
-		void polynomialLexing(std::string& expression, char delimiter); //attaches extra content to expression, in this case adds + sign before every -
-		std::vector<std::string> tokenize(const std::string& expression, char delimiter); //separate poly terms
-		void termLexing(std::vector<std::string>& tokens); //lexer attaches extra content to tokens, in this case tokens are terms, lexer attaches x and exponent information to terms 
-		std::vector<int> extractCoefficents(const std::vector<std::string>& tokens);
+		/*
+		* polynomialLexing(): Attaches extra content to polynomial expression, in this case adds '+' sign before every '-'
+		* tokenize(): Separates polyonimal terms by '+' signs
+		* termLexing(): Attaches extra content to tokens, in this case tokens are terms, termLexing() attaches 'x' and exponent information to terms wherever missing
+		* extract(): Extracts coefficients from the tokens
+		*/
+		void polynomialLexing(std::string& expression, char delimiter); 
+		std::vector<std::string> tokenize(const std::string& expression, char delimiter); 
+		void termLexing(std::vector<std::string>& tokens);  
+		std::vector<int> extract(const std::vector<std::string>& tokens);
 	}
 	
 	std::vector<int> parseCSV(const std::string& line);

@@ -4,17 +4,12 @@
 
 void EvaluationSimulationHandler::getInputFromConsole() {
 	std::cout << "Please enter your inputs" << "\n\t";
-
 	std::cout << "Enter polynomial: ";
 	std::vector<int> coeff = Parser::parsePolynomial(handleUserInput(false));
-
 	std::cout << "Enter start number of the input range: ";
 	int num1 = std::stoi(handleUserInput(false));
-
 	std::cout << "Enter finish number of the input range: ";
 	int num2 = std::stoi(handleUserInput(false));
-
-	//RESERVE BEFORE PUSH BACK???
 	pEvaluators.push_back(new PolynomialEvaluator(coeff, num1, num2));
 }
 
@@ -25,6 +20,7 @@ void EvaluationSimulationHandler::run() {
 }
 
 EvaluationSimulationHandler::~EvaluationSimulationHandler() {
+	std::cout << "destructing evaluation sim handler" << '\n';
 	for (const auto& i : pEvaluators) {
 		delete i;
 	}

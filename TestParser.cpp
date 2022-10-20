@@ -12,6 +12,7 @@ TEST_CASE("Parser: parseCSV()") {
     CHECK(output != Parser::parseCSV("1,2,3,4"));
 }
 
+
 TEST_CASE("Parser: parsePolynomial()") {
     std::string p0{ "x^2" };
     CHECK(std::vector<int>{0, 0, 1, 0, 0} == Parser::parsePolynomial(p0));
@@ -44,6 +45,21 @@ TEST_CASE("Parser: Invalid Inputs - parsePolynomial()") {
 
     std::string p4{ "y^2" };
     CHECK_THROWS_AS(Parser::parsePolynomial(p4), const std::exception&);
+
+    std::string p5{ "x^5" };
+    CHECK_THROWS_AS(Parser::parsePolynomial(p5), const std::exception&);
+
+    std::string p6{ "x^10" };
+    CHECK_THROWS_AS(Parser::parsePolynomial(p6), const std::exception&);
+
+    std::string p7{ "2x^7 + y^4 - 3000" };
+    CHECK_THROWS_AS(Parser::parsePolynomial(p7), const std::exception&);
+
+    std::string p8{ "x^2 + 10x" };
+    CHECK_THROWS_AS(Parser::parsePolynomial(p8), const std::exception&);
+
+    std::string p9{ "x^2 - 10x" };
+    CHECK_THROWS_AS(Parser::parsePolynomial(p9), const std::exception&);
 }
 
 TEST_CASE("Parser: parseToCsvString()") {
@@ -55,13 +71,11 @@ TEST_CASE("Parser: parseToPolynomialString()") {
     std::string p0{ "x^2+1" };
     CHECK(p0 == Parser::parseToPolynomialString(std::vector<int>{1, 0, 1}));
 
-    std::string p1 {"x^2"};
+    std::string p1{ "x^2" };
     CHECK(p1 == Parser::parseToPolynomialString(std::vector<int>{1, 0, 0}));
     //(p1 == Parser::parseToPolynomialString(std::vector<int>{0, 0, 1, 0, 0}));
 
     std::string p2{ "-3x^4-9x^3-x^2+2x+20" };
     CHECK(p2 == Parser::parseToPolynomialString(std::vector<int>{-3, -9, -1, 2, 20}));
 }
-
-
 #endif

@@ -18,7 +18,6 @@ void BaseSimulationHandler::getOutputMethod() {
 	std::cout << "Please select how you want to view your output:" << "\n\t";
 	std::cout << "Press '1' to view output on console" << "\n\t";
 	std::cout << "Press '2' to write output to file" << "\n";
-	//std::cout << "Press '3' to view output on graph" << "\n";
 
 	std::string input = handleUserInput();
 	if (input == "1") viewOutputOnConsole();

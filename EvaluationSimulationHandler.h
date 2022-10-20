@@ -4,7 +4,7 @@
 
 class EvaluationSimulationHandler : public BaseSimulationHandler {
 	std::vector<PolynomialEvaluator*> pEvaluators;
-
+	
 	virtual void getInputFromConsole();
 	virtual void getInputFromFile();
 	virtual void viewOutputOnConsole();

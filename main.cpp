@@ -5,7 +5,6 @@
 #include <iostream>
 #include "SimplyPolynomialSimulator.h"
 
-
 int main() {
     SimplyPolynomialSimulator pSimulator;
     pSimulator.startUp();

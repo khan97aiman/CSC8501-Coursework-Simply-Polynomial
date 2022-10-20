@@ -158,7 +158,6 @@
     <ClInclude Include="FileHandler.h" />
     <ClInclude Include="FittingSimulationHandler.h" />
     <ClInclude Include="HelperFunctions.h" />
-    <ClInclude Include="matplotlibcpp.h" />
     <ClInclude Include="Parser.h" />
     <ClInclude Include="Polynomial.h" />
     <ClInclude Include="PolynomialEvaluator.h" />

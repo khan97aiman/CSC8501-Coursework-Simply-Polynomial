@@ -27,5 +27,4 @@ TEST_CASE("PolynomialFitter: fit() with InputSet") {
     pFitter2.fit();
     CHECK(*pFitter2.getPolynomial() == p2);
 }
-
 #endif

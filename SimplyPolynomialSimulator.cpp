@@ -25,9 +25,14 @@ void SimplyPolynomialSimulator::mainMenu() {
 }
 
 void SimplyPolynomialSimulator::run() {
-    simulationHandler->getInputMethod();
-    simulationHandler->run();
-    simulationHandler->getOutputMethod();
+    try {
+        simulationHandler->getInputMethod();
+        simulationHandler->run();
+        simulationHandler->getOutputMethod();
+    }
+    catch (const std::exception& e) {
+        handleException(e);
+    }
 }
 
 SimplyPolynomialSimulator::~SimplyPolynomialSimulator() {
