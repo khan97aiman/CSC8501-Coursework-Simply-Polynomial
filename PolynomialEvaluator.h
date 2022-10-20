@@ -10,7 +10,6 @@ public:
 	std::vector<int> evaluate(); //change to void???
 	std::vector<int> getOutput() { return outputSet; }
 	~PolynomialEvaluator() {
-		std::cout << "Destructing Polynomial Evaluator\n";
 		delete polynomial;
 	}
 	//void plot();

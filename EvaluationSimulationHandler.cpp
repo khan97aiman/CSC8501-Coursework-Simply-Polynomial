@@ -25,7 +25,6 @@ void EvaluationSimulationHandler::run() {
 }
 
 EvaluationSimulationHandler::~EvaluationSimulationHandler() {
-	std::cout << "Destructing Evaluation Simulation Handler\n";
 	for (const auto& i : pEvaluators) {
 		delete i;
 	}

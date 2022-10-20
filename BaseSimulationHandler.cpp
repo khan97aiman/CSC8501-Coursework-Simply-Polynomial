@@ -28,7 +28,3 @@ void BaseSimulationHandler::getOutputMethod() {
 		getOutputMethod();
 	}
 }
-
-BaseSimulationHandler::~BaseSimulationHandler() {
-	std::cout << "Destructor for Base Simulation Handler Called\n";
-}

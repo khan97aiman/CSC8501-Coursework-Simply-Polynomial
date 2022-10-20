@@ -12,6 +12,6 @@ public:
 	void getInputMethod();
 	void getOutputMethod();
 	virtual void run() = 0;
-	virtual ~BaseSimulationHandler();
+	virtual ~BaseSimulationHandler() {};
 };
 

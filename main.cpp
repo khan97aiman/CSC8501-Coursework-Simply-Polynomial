@@ -11,9 +11,6 @@ int main() {
     pSimulator.startUp();
     pSimulator.mainMenu();
     pSimulator.run();
-
-    std::cout << "Destructing all objects" << '\n';
-    std::cout << "-----------------------------------------" << '\n';
 }
 #endif
 

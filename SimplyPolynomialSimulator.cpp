@@ -31,6 +31,5 @@ void SimplyPolynomialSimulator::run() {
 }
 
 SimplyPolynomialSimulator::~SimplyPolynomialSimulator() {
-    std::cout << "Destructor for Simply Polynomial Simulator Called\n";
     delete simulationHandler;
 }

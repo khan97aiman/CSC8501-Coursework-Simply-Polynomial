@@ -55,6 +55,5 @@ void PolynomialFitter::fit() {
 }
 
 PolynomialFitter::~PolynomialFitter() {
-	std::cout << "Destructing Polynomial Fitter\n";
 	delete polynomial;
 }
