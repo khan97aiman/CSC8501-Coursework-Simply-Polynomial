@@ -64,7 +64,7 @@ std::vector<int> Parser::parseCSV(const std::string& line) {
 
 std::vector<int> Parser::parsePolynomial(const std::string& expression) {
     std::string pExpression = std::regex_replace(expression, std::regex("\\s+"), "");
-    if (!isPolynomialValid(pExpression)) 
+    if (!isPolynomialValid(pExpression) || pExpression == "")
         throw std::invalid_argument(INVALID_POLYNOMIAL);
     
     PolynomialHelper::polynomialLexing(pExpression, '+');

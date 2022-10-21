@@ -6,9 +6,9 @@
 void SimplyPolynomialSimulator::startUp() {
     std::cout << "*****************************************************************" << '\n';
     std::cout << "             Welcome to Simply Polynomial Simulator!             " << '\n';
-    std::cout << "*****************************************************************" << "\n\n";
-
-    std::cout << "Press 'Q' to exit this simulation, otherwise have fun using it :)" << '\n';
+    std::cout << "*****************************************************************" << '\n';
+    std::cout << "=================================================================" << '\n';
+    std::cout << "                     Have fun using it :)                        " << '\n';
     std::cout << "=================================================================" << '\n';
 }
 
