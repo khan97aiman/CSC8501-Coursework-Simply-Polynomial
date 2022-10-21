@@ -36,7 +36,6 @@ void FittingSimulationHandler::run() {
 	for (const auto& fitter : pFitters) {
 		fitter->fit();
 	}
-	//check if number of non zero terms is equal to num terms
 }
 
 FittingSimulationHandler::~FittingSimulationHandler() {

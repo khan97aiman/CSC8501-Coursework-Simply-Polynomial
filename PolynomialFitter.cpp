@@ -39,6 +39,8 @@ PolynomialFitter::PolynomialFitter(std::vector<int> outputSet, int startInputRan
 
 void PolynomialFitter::fit() {
 	fitGivenInputSet();
+	/*if (numTerms && polynomial->numberOfTerms() != numTerms)
+		throw std::runtime_error("Could not fit!");*/
 }
 
 PolynomialFitter::~PolynomialFitter() {
