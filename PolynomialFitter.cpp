@@ -3,7 +3,7 @@
 #include "HelperFunctions.h"
 
 void PolynomialFitter::fitGivenInputSet() {
-	std::vector<std::vector<double>> A; // DOUBLE OR INT
+	std::vector<std::vector<double>> A; 
 	int degree{ determineDegree() };
 	for (const auto& x: inputSet) {
 		std::vector<double> row;
@@ -31,7 +31,6 @@ int PolynomialFitter::determineDegree() {
 
 PolynomialFitter::PolynomialFitter(std::vector<int> outputSet, int startInputRange, int endInputRange, int numTerms) {
 	this->outputSet = outputSet;
-	//could be a lambda function - similar code in poly evaluator constructor
 	for (int i{ startInputRange }; i <= endInputRange; i++) {
 		this->inputSet.push_back(i);
 	}
