@@ -50,7 +50,7 @@ void FittingSimulationHandler::getInputFromFile() {
 	std::vector<FileHandler::FileFormatCSV> data = FileHandler::CSV::read(filename);
 
 	for (const auto& e : data) {
-		pFitters.push_back(new PolynomialFitter(e.outputSet, e.inputRange[0], e.inputRange[1], e.numTerms));
+		e.inputRange.size() ? pFitters.push_back(new PolynomialFitter(e.outputSet, e.inputRange[0], e.inputRange[1], e.numTerms)) : pFitters.push_back(new PolynomialFitter(e.outputSet, 0, 0, e.numTerms));
 	}
 }
 
