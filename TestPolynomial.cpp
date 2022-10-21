@@ -42,4 +42,24 @@ TEST_CASE("Polynomial: degree()") {
     CHECK(p4.degree() == 0);
 }
 
+TEST_CASE("Polynomial: numberOfTerms()") {
+    Polynomial p1(std::vector<int>({ 2,4,9 }));
+    CHECK(p1.numberOfTerms() == 3);
+
+    Polynomial p2(std::vector<int>({ 9,0,0,0 }));
+    CHECK(p2.numberOfTerms() == 1);
+
+    Polynomial p3(std::vector<int>({ 2,0,0 }));
+    CHECK(p3.numberOfTerms() == 1);
+
+    Polynomial p4(std::vector<int>({ 0 }));
+    CHECK(p4.numberOfTerms() == 0);
+
+    Polynomial p5(std::vector<int>({ 1 }));
+    CHECK(p5.numberOfTerms() == 1);
+
+    Polynomial p6(std::vector<int>({ -3, 0, 0, 7, 1 }));
+    CHECK(p6.numberOfTerms() == 3);
+}
+
 #endif

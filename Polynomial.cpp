@@ -26,6 +26,9 @@ const int Polynomial::evaluate(int x) {
 	return std::inner_product(coefficients.begin(), coefficients.end(), xVector.begin(), 0);
 }
 
+const int Polynomial::numberOfTerms() {
+	return (int)coefficients.size() - std::count(coefficients.begin(), coefficients.end(), 0);
+}
 const bool Polynomial::operator==(const Polynomial& p) {
 	return this->coefficients == p.coefficients;
 }
