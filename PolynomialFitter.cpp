@@ -15,6 +15,15 @@ void PolynomialFitter::fitGivenInputSet() {
 	polynomial = new Polynomial(coefficients);
 }
 
+void PolynomialFitter::fitWithoutInputSet() {
+	//create an input set starting from zero
+	int num = outputSet.size();
+	for (int i{0}; i < num; i++) {
+		this->inputSet.push_back(i);
+	}
+	fitGivenInputSet();
+}
+
 int PolynomialFitter::determineDegree() {
 	int degree{ 0 };
 	std::vector<int> differential { outputSet };
@@ -31,14 +40,19 @@ int PolynomialFitter::determineDegree() {
 
 PolynomialFitter::PolynomialFitter(std::vector<int> outputSet, int startInputRange, int endInputRange, int numTerms) {
 	this->outputSet = outputSet;
-	for (int i{ startInputRange }; i <= endInputRange; i++) {
-		this->inputSet.push_back(i);
+	if (startInputRange != 0 || endInputRange != 0) {
+		for (int i{ startInputRange }; i <= endInputRange; i++) {
+			this->inputSet.push_back(i);
+		}
 	}
 	this->numTerms = numTerms;
 }
 
 void PolynomialFitter::fit() {
-	fitGivenInputSet();
+	if (inputSet.size() > 0)
+		fitGivenInputSet();
+	else
+		fitWithoutInputSet();
 	/*if (numTerms && polynomial->numberOfTerms() != numTerms)
 		throw std::runtime_error("Could not fit!");*/
 }
