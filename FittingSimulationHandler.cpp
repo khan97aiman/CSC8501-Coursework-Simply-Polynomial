@@ -46,7 +46,7 @@ FittingSimulationHandler::~FittingSimulationHandler() {
 }
 
 void FittingSimulationHandler::getInputFromFile() {
-	std::cout << "Filename: ";
+	std::cout << "Filename (REQUIRED '.csv'): ";
 	std::string filename = handleUserInput(false);
 	std::vector<FileHandler::FileFormatCSV> data = FileHandler::CSV::read(filename);
 
@@ -65,7 +65,7 @@ void FittingSimulationHandler::viewOutputOnConsole() {
 }
 
 void FittingSimulationHandler::writeOutputToFile() {
-	std::cout << "Filename: ";
+	std::cout << "Filename (REQUIRED '.txt'): ";
 	std::string filename = handleUserInput(false);
 
 	std::vector<FileHandler::FileFormatEXP> output;

@@ -26,7 +26,7 @@ EvaluationSimulationHandler::~EvaluationSimulationHandler() {
 }
 
 void EvaluationSimulationHandler::getInputFromFile() {
-	std::cout << "Filename: ";
+	std::cout << "Filename (REQUIRED '.txt'): ";
 	std::string filename = handleUserInput(false);
 	std::vector<FileHandler::FileFormatEXP> data = FileHandler::TXT::read(filename);
 
@@ -44,7 +44,7 @@ void EvaluationSimulationHandler::viewOutputOnConsole() {
 }
 
 void EvaluationSimulationHandler::writeOutputToFile() {
-	std::cout << "Filename: ";
+	std::cout << "Filename (REQUIRED '.csv'): ";
 	std::string filename = handleUserInput(false);
 
 	std::vector<std::vector<int>> output;

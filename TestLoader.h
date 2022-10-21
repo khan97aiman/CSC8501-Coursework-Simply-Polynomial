@@ -1,4 +1,4 @@
 #pragma once
 
-#define RUN_TESTS
+//#define RUN_TESTS
 

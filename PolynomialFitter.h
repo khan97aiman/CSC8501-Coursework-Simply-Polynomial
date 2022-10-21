@@ -12,9 +12,8 @@ class PolynomialFitter {
 	//helper functions
 	void fitGivenInputSet();
 public:
-	int determineDegree();
 	PolynomialFitter(std::vector<int> outputSet, int startInputRange, int endInputRange, int numTerms);
-
+	int determineDegree();
 	void fit();
 	Polynomial* getPolynomial() { return polynomial; }
 	std::vector<int> getInputSetRange() { return std::vector<int>{inputSet.front(), inputSet.back()}; }
