@@ -37,9 +37,12 @@ void EvaluationSimulationHandler::getInputFromFile() {
 
 void EvaluationSimulationHandler::viewOutputOnConsole() {
 	std::cout << "-----------------------------------------------------------------" << '\n';
-	std::cout << "Output Set: {" << Parser::parseToCsvString(pEvaluators[0]->getOutput()) << "}\n";
-	std::cout << "-----------------------------------------------------------------" << '\n';
+	for (const auto& e : pEvaluators) {
+		std::cout << "Output Set: {" << Parser::parseToCsvString(e->getOutput()) << "}\n";
+		std::cout << "-----------------------------------------------------------------" << '\n';
+	}
 }
+
 void EvaluationSimulationHandler::writeOutputToFile() {
 	std::cout << "Filename: ";
 	std::string filename = handleUserInput(false);

@@ -57,9 +57,11 @@ void FittingSimulationHandler::getInputFromFile() {
 
 void FittingSimulationHandler::viewOutputOnConsole() {
 	std::cout << "-----------------------------------------------------------------" << '\n';
-	std::cout << "Derived Polynomial is: " << Parser::parseToPolynomialString(pFitters[0]->getPolynomial()->getCoefficients()) << '\n';
-	std::cout << "Input Set Range: {" << Parser::parseToCsvString(pFitters[0]->getInputSetRange()) << "}\n";
-	std::cout << "-----------------------------------------------------------------" << '\n';
+	for (const auto& e : pFitters) {
+		std::cout << "Derived Polynomial is: " << Parser::parseToPolynomialString(e->getPolynomial()->getCoefficients()) << '\n';
+		std::cout << "Input Set Range: {" << Parser::parseToCsvString(e->getInputSetRange()) << "}\n";
+		std::cout << "-----------------------------------------------------------------" << '\n';
+	}
 }
 
 void FittingSimulationHandler::writeOutputToFile() {
