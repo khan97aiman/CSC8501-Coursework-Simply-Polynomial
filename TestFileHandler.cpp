@@ -34,8 +34,8 @@ TEST_CASE("FileHandler::CSV write()") {
         {4, 5, 6},
         {7, 8, 9, 2}
     };
-    FileHandler::CSV::write("test_writeBulk.csv", wData);
-    CHECK(compare_files("writeBulk.csv", "test_writeBulk.csv"));
+    FileHandler::CSV::write("write_output_sets_doctest.csv", wData);
+    CHECK(compare_files("output_sets_doctest.csv", "write_output_sets_doctest.csv"));
 }
 
 TEST_CASE("FileHandler::CSV read()") {
@@ -45,7 +45,7 @@ TEST_CASE("FileHandler::CSV read()") {
         FileHandler::FileFormatCSV(std::vector<int> { 2, 5, 10, 17, 26 }, std::vector<int> { 1, 5}, 2),
     };
 
-    std::vector<FileHandler::FileFormatCSV> test = FileHandler::CSV::read("readBulk.csv");
+    std::vector<FileHandler::FileFormatCSV> test = FileHandler::CSV::read("read_output_sets_doctest.csv");
 
     for (size_t i = 0; i < test.size(); i++) {
         CHECK(test[i].outputSet == obj[i].outputSet);
@@ -84,13 +84,19 @@ TEST_CASE("FileHandler::TXT write()/read()") {
         FileHandler::FileFormatEXP(std::vector<int> { 0, 0, 1, 0, 1 }, std::vector<int> { 1, 5}),
     };
 
-    FileHandler::TXT::write("test_writeBulk.txt", obj);
-    CHECK(compare_files("writeBulk.txt", "test_writeBulk.txt"));
+    FileHandler::TXT::write("write_expressions_doctest.txt", obj);
+    CHECK(compare_files("expressions_doctest.txt", "write_expressions_doctest.txt"));
 
-    std::vector<FileHandler::FileFormatEXP> test = FileHandler::TXT::read("test_writeBulk.txt");
+    std::vector<FileHandler::FileFormatEXP> test = FileHandler::TXT::read("write_expressions_doctest.txt");
     for (size_t i = 0; i < test.size(); i++) {
         CHECK(test[i].pCoefficients == obj[i].pCoefficients);
         CHECK(test[i].inputRange == obj[i].inputRange);
+    }
+
+    std::vector<FileHandler::FileFormatEXP> test1 = FileHandler::TXT::read("expressions_doctest.txt");
+    for (size_t i = 0; i < test1.size(); i++) {
+        CHECK(test1[i].pCoefficients == obj[i].pCoefficients);
+        CHECK(test1[i].inputRange == obj[i].inputRange);
     }
 }
 
