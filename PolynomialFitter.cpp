@@ -38,18 +38,6 @@ PolynomialFitter::PolynomialFitter(std::vector<int> outputSet, int startInputRan
 	this->numTerms = numTerms;
 }
 
-PolynomialFitter::PolynomialFitter(std::vector<int> outputSet, int startInputRange, int endInputRange) {
-	this->outputSet = outputSet;
-	//could be a lambda function - similar code in poly evaluator constructor
-	for (int i{ startInputRange }; i <= endInputRange; i++) {
-		this->inputSet.push_back(i);
-	}
-}
-
-PolynomialFitter::PolynomialFitter(std::vector<int> outputSet) {
-	this->outputSet = outputSet;
-}
-
 void PolynomialFitter::fit() {
 	fitGivenInputSet();
 }

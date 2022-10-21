@@ -1,6 +1,7 @@
 #include "SimplyPolynomialSimulator.h"
 #include <iostream>
 #include "HelperFunctions.h"
+#include "FittingSimulationHandler.h"
 
 void SimplyPolynomialSimulator::startUp() {
     std::cout << "*****************************************************************" << '\n';
@@ -18,6 +19,7 @@ void SimplyPolynomialSimulator::mainMenu() {
     
     std::string input { handleUserInput() };
     if (input == "1") simulationHandler = new EvaluationSimulationHandler();
+    else if (input == "2") simulationHandler = new FittingSimulationHandler();
     else {
         handleInvalidInput();
         mainMenu();

@@ -51,6 +51,7 @@ std::vector<FileHandler::FileFormatCSV> FileHandler::CSV::read(const std::string
         catch (const std::exception& e) {
             handleException(e);
             file.close();
+            throw std::runtime_error(FILE_READING_FAILED);
         }
         return data;
     }
@@ -93,6 +94,7 @@ std::vector<FileHandler::FileFormatEXP> FileHandler::TXT::read(const std::string
         catch (const std::exception& e) {
             handleException(e);
             file.close();
+            throw std::runtime_error(FILE_READING_FAILED);
         }
         return data;
     }

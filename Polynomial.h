@@ -8,6 +8,7 @@ public:
 	Polynomial(const Polynomial& p);
 	const bool operator==(const Polynomial& p);
 	const int degree() { return (int)coefficients.size() - 1; }
+	const std::vector<int> getCoefficients() { return coefficients; }
 	//int numberOfTerms();
 	const int evaluate(int x);
 };

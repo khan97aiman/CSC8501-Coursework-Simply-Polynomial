@@ -6,7 +6,7 @@ Polynomial::Polynomial(std::vector<int> coefficients) {
 	//get index of first non zero element
 	int index = 0;
 	for (; index < coefficients.size(); index++){
-		if (coefficients[index] > 0) 
+		if (coefficients[index] != 0) 
 			break;
 	}
 	for (size_t i = index; i < coefficients.size(); i++) {

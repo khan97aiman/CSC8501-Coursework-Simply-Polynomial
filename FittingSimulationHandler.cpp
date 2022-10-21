@@ -1,37 +1,45 @@
 #include "FittingSimulationHandler.h"
 #include "Parser.h"
 #include "FileHandler.h"
+#include "Constants.h"
+#include "ErrorMessages.h"
 
+auto upperCase = [](std::string str) {
+	for (auto& c : str) c = toupper(c);
+	return str;
+};
+
+auto getInput = []() {
+	std::string input = handleUserInput(false);
+	return upperCase(input) == UNKNOWN ? "0" : input;
+};
 
 void FittingSimulationHandler::getInputFromConsole() {
-	std::cout << "Please enter your inputs, type 'UNKNOWN' if you do not know it: " << "\n\t";
+	std::cout << "Please enter your inputs, type 'UNKNOWN' for optional values if you don't want to input: " << "\n\t";
 
-	std::cout << "Enter output set: "; //DONT ACCEPT UNKNOWN HERE
-	std::vector<int> coeff = Parser::parseCSV(handleUserInput(false));
+	std::cout << "Enter output set (REQUIRED): "; 
+	std::vector<int> outputSet = Parser::parseCSV(handleUserInput(false));
 
-	std::cout << "Enter start number of the input range: ";
-	//HANLDE INVALID INPUT AND UNKNOWNNNNN
-	int num1 = std::stoi(handleUserInput(false));
+	std::cout << "\tEnter start number of the input range (OPTIONAL): ";
+	int num1 = std::stoi(getInput());
 
-	std::cout << "Enter finish number of the input range: ";
-	int num2 = std::stoi(handleUserInput(false));
+	std::cout << "\tEnter finish number of the input range (OPTIONAL): ";
+	int num2 = std::stoi(getInput());
 
-	std::cout << "Enter number of terms in the polynomial: ";
-	std::string num = handleUserInput(false);
-	int numTerms{ 0 };
-	if (num != "UNKNOWN") numTerms = std::stoi(handleUserInput(false));
+	std::cout << "\tEnter number of terms in the polynomial (OPTIONAL): ";
+	int numTerms = std::stoi(getInput());
 
-	numTerms ? pFitters.push_back(new PolynomialFitter(coeff, num1, num2, numTerms)) : pFitters.push_back(new PolynomialFitter(coeff, num1, num2));
+	pFitters.push_back(new PolynomialFitter(outputSet, num1, num2, numTerms));
 }
 
 void FittingSimulationHandler::run() {
 	for (const auto& fitter : pFitters) {
 		fitter->fit();
 	}
+	//check if number of non zero terms is equal to num terms
 }
 
 FittingSimulationHandler::~FittingSimulationHandler() {
-	std::cout << "Destructing Fitting Simulation Handler\n";
 	for (const auto& i : pFitters) {
 		delete i;
 	}
@@ -43,13 +51,14 @@ void FittingSimulationHandler::getInputFromFile() {
 	std::vector<FileHandler::FileFormatCSV> data = FileHandler::CSV::read(filename);
 
 	for (const auto& e : data) {
-		pFitters.push_back(new PolynomialFitter(e.outputSet, e.inputRange[0], e.inputRange[1], e.numTerms)); //?????????????????????????
+		pFitters.push_back(new PolynomialFitter(e.outputSet, e.inputRange[0], e.inputRange[1], e.numTerms));
 	}
 }
 
 void FittingSimulationHandler::viewOutputOnConsole() {
 	std::cout << "-----------------------------------------------------------------" << '\n';
-	//std::cout << "Derived Polynomial is: " << Parser::parseToPolynomialString(pFitters[0]->getPolynomial()) << '\n';
+	std::cout << "Derived Polynomial is: " << Parser::parseToPolynomialString(pFitters[0]->getPolynomial()->getCoefficients()) << '\n';
+	std::cout << "Input Set Range: {" << Parser::parseToCsvString(pFitters[0]->getInputSetRange()) << "}\n";
 	std::cout << "-----------------------------------------------------------------" << '\n';
 }
 
@@ -57,11 +66,12 @@ void FittingSimulationHandler::writeOutputToFile() {
 	std::cout << "Filename: ";
 	std::string filename = handleUserInput(false);
 
-	std::vector<std::vector<int>> output;
+	std::vector<FileHandler::FileFormatEXP> output;
 	for (const auto& e : pFitters) {
-		//output.push_back(e->getOutput());
+		FileHandler::FileFormatEXP data(e->getPolynomial()->getCoefficients(), e->getInputSetRange());
+		output.push_back(data);
 	}
-	FileHandler::CSV::write(filename, output);
+	FileHandler::TXT::write(filename, output);
 	std::cout << "-----------------------------------------------------------------" << '\n';
 	std::cout << "Your output has been written to " << filename << '\n';
 	std::cout << "-----------------------------------------------------------------" << '\n';
